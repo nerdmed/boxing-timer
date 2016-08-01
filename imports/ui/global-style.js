@@ -11,6 +11,6 @@ export const lightText = {
 	color: '#fff'
 };
 
-export const background = '#F0F0F0';
+export const defaultBackground = '#F0F0F0';
 export const fightColor = '#D90000';
 export const breakColor = '#3498DB';

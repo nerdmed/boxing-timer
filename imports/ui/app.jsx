@@ -4,13 +4,24 @@ import { connect } from 'react-redux';
 import Timer from './timer.jsx';
 import TimePreview from './time-preview.jsx';
 
-class TimerApp extends Component{ 
+class TimerApp extends Component{
+
+	getHeaderStyles() {
+		let newHeaderStyles = { ...styles.header };
+		if (this.props.running) {
+			newHeaderStyles.backgroundColor = fightColor;
+		} else {
+			newHeaderStyles.backgroundColor = defaultBackground;
+		}
+		console.log('newHeaderStyles', newHeaderStyles);
+		return newHeaderStyles;
+	}
 
 	render() {
 		console.log(this.props);
 		return (
 			<div className="container">
-			        <header style={styles.header}>
+			        <header style={this.getHeaderStyles()}>
 			        	<Timer/>
 			        </header>
 			        <footer style={styles.footer}>
@@ -25,7 +36,8 @@ class TimerApp extends Component{
 const mapStateToProps = (state) => {
 	return {
 		roundTime: state.timer.roundTime,
-		breakTime: state.timer.breakTime
+		breakTime: state.timer.breakTime,
+		running: state.timer.running,
 	}
 };
 
@@ -35,15 +47,14 @@ let App = connect(
 
 export default App;
 
-
-import { background, fightColor } from './global-style.js';
+import { defaultBackground, fightColor } from './global-style.js';
 
 const footerHeight = 12;
 const styles = {
 	header: {
 		height: `${100-footerHeight}vh`,
 		width: '100%',
-		backgroundColor: background,
+		// backgroundColor: background,
 	},
 	footer: {
 		display: 'flex',
